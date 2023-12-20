@@ -1,3 +1,5 @@
+package Characters;
+
 import java.awt.image.BufferedImage;
 
 import eg.edu.alexu.csd.oop.game.GameObject;

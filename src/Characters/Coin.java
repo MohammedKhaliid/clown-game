@@ -1,3 +1,5 @@
+package Characters;
+
 import javax.imageio.ImageIO;
 import java.io.IOException;
 
