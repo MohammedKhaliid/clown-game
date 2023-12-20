@@ -4,7 +4,7 @@ import Iterators.RightHand;
 import Iterators.LeftHand;
 
 public class Mario extends Character {
-    private static Mario mario;
+    private static final Mario mario = new Mario(-1, -1, true);    // To be updated later
     private RightHand rightHand;
     private LeftHand leftHand;
 
@@ -15,10 +15,6 @@ public class Mario extends Character {
     }
 
     public static Mario getMario() {
-        if (mario == null) {
-            mario = new Mario(-1, -1, true);    // To be updated later
-        }
-
         return mario;
     }
 
