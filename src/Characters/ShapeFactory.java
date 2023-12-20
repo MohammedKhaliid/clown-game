@@ -11,11 +11,11 @@ public class ShapeFactory {
         int shapeType = randomizer.nextInt(3);
 
         if (shapeType == 0) {
-            shape = new Mushroom(randomizer.nextInt(WINDOW_WIDTH), 0, 60, 60, randomizer.nextInt(Mushroom.COLORS_COUNT));
+            shape = new Mushroom(randomizer.nextInt(WINDOW_WIDTH), 0, randomizer.nextInt(Mushroom.COLORS_COUNT));
         } else if (shapeType == 1) {
-            shape = new Coin(randomizer.nextInt(WINDOW_WIDTH), 0, 60, 60);
+            shape = new Coin(randomizer.nextInt(WINDOW_WIDTH), 0);
         } else {
-            shape = new Villain(randomizer.nextInt(WINDOW_WIDTH), 0, 60, 60, level);
+            shape = new Villain(randomizer.nextInt(WINDOW_WIDTH), 0, level);
         }
 
         return shape;

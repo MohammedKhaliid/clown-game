@@ -8,8 +8,8 @@ public class Mushroom extends Shape {
 
     static final int COLORS_COUNT = 4;
 
-    public Mushroom(int posX, int posY, int width, int height, int color) {
-        super(posX, posY, width, height);
+    public Mushroom(int posX, int posY, int color) {
+        super(posX, posY);
 
         this.setColor(color);
     }
