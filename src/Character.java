@@ -10,6 +10,14 @@ public abstract class Character implements GameObject {
     protected int height;
     protected BufferedImage[] spriteImages;
 
+    public Character(int x, int y, boolean visible, int width, int height) {
+        this.x = x;
+        this.y = y;
+        this.visible = visible;
+        this.width = width;
+        this.height = height;
+    }
+
     public int getX() {
         return x;
     }
@@ -39,6 +47,6 @@ public abstract class Character implements GameObject {
     }
 
     public void setY(int y) {
-    	this.y = y;
+        this.y = y;
     }
 }
