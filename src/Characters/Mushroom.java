@@ -6,8 +6,10 @@ import java.io.IOException;
 public class Mushroom extends Shape {
     private int color;
 
-    public Mushroom(int posX, int posY, int width, int height, int type, int color) {
-        super(posX, posY, width, height, type);
+    static final int COLORS_COUNT = 4;
+
+    public Mushroom(int posX, int posY, int width, int height, int color) {
+        super(posX, posY, width, height);
 
         this.setColor(color);
     }
@@ -21,19 +23,19 @@ public class Mushroom extends Shape {
 
         try {
             switch(color){
-                case 1:
+                case 0:
                     // Red
                     spriteImages[0] = ImageIO.read(getClass().getResourceAsStream("res/red_mushroom.png"));
                     break;
-                case 2:
+                case 1:
                     // Green
                     spriteImages[0] = ImageIO.read(getClass().getResourceAsStream("res/green_mushroom.png"));
                     break;
-                case 3:
+                case 2:
                     // Blue
                     spriteImages[0] = ImageIO.read(getClass().getResourceAsStream("res/blue_mushroom.png"));
                     break;
-                case 4:
+                case 3:
                     // Violet
                     spriteImages[0] = ImageIO.read(getClass().getResourceAsStream("res/violet_mushroom.png"));
             }

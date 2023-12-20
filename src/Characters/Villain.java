@@ -6,8 +6,8 @@ import java.io.IOException;
 public class Villain extends Shape{
     private int level;
 
-    public Villain(int posX, int posY, int width, int height, int type, int level) {
-        super(posX, posY, width, height, type);
+    public Villain(int posX, int posY, int width, int height, int level) {
+        super(posX, posY, width, height);
         this.level = level;
 
         try {
