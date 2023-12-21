@@ -9,7 +9,7 @@ public class Mushroom extends Shape {
     static final int COLORS_COUNT = 4;
 
     public Mushroom(int posX, int posY, int color) {
-        super(posX, posY, "res/Mushroom" + color + ".png");
+        super(posX, posY, "/Mushroom" + color + ".png");
 
         this.color = color;
     }

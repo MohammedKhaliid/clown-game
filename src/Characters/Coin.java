@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class Coin extends Shape {
     public Coin(int posX, int posY) {
-        super(posX, posY, "res/Coin.png");
+        super(posX, posY, "/Coin.png");
 
     }
 }

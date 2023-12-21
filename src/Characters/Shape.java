@@ -7,7 +7,7 @@ public abstract class Shape extends Character {
 //    private int type;
 
     public Shape(int posX, int posY, String path){
-        super(posX, posY, true, path);
+        super(posX, posY, path);
 
 //        super.spriteImages = new BufferedImage[MAX_STATES];
 //        this.type = type;

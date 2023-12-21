@@ -11,9 +11,9 @@ public abstract class Character implements GameObject {
     protected int x;
     protected int y;
     protected boolean visible;
-    protected BufferedImage[] spriteImages;
+    protected BufferedImage[] spriteImages = new BufferedImage[1];
 
-    public Character(int x, int y, boolean visible, String path) {
+    public Character(int x, int y, String path) {
         this.x = x;
         this.y = y;
         //this.type = type;
@@ -56,5 +56,9 @@ public abstract class Character implements GameObject {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
     }
 }

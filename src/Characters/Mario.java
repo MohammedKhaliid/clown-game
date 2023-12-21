@@ -4,12 +4,12 @@ import Iterators.RightHand;
 import Iterators.LeftHand;
 
 public class Mario extends Character {
-    private static final Mario mario = new Mario(-1, -1, true);    // To be updated later
+    private static final Mario mario = new Mario(200, 270);    // To be updated later
     private RightHand rightHand;
     private LeftHand leftHand;
 
-    private Mario(int x, int y, boolean visible) {
-        super(x, y, visible, "res/Mario.png");
+    private Mario(int x, int y) {
+        super(x, y, "/Mario.png");
         this.rightHand = new RightHand();
         this.leftHand = new LeftHand();
     }
