@@ -1,3 +1,5 @@
+package Games;
+
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
 
@@ -5,7 +7,11 @@ import java.util.List;
 
 public class Game implements World {
 
-
+    protected int score;
+    protected int width;
+    protected int height;
+    protected int speed;
+    protected long startTime;
     @Override
     public List<GameObject> getConstantObjects() {
         return null;
