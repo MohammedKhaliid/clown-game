@@ -13,16 +13,16 @@ public class RightHand implements Iterator {
     }
     public boolean lastThreeMatches()
     {
-        Mushroom m1 = plate.peek();
-        plate.pop();
-        Mushroom m2 = plate.peek();
-        plate.pop();
-        Mushroom m3 = plate.peek();
-        plate.push(m2);
-        plate.push(m1);
+        Mushroom m1 = plate.pop();
+        Mushroom m2 = plate.pop();
+        Mushroom m3 = plate.pop();
 
         if(m1.getColor() == m2.getColor() && m2.getColor() == m3.getColor())
             return true;
+
+        plate.push(m3);
+        plate.push(m2);
+        plate.push(m1);
         return false;
     }
     public Mushroom lastMushroom()
