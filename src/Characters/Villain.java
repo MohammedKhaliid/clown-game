@@ -4,24 +4,12 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 
 public class Villain extends Shape{
-    private int level;
-
-    public Villain(int posX, int posY, int level) {
-        super(posX, posY);
-        this.level = level;
-
-        try {
-            spriteImages[0] = ImageIO.read(getClass().getResourceAsStream("res/villain.png"));
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+    private final int type;
+    public Villain(int posX, int posY, int type) {
+        super(posX, posY, "res/Villain" + type + ".png");
+        this.type = type;
     }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
+    public int getType(){
+        return type;
     }
 }

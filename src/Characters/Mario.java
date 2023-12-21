@@ -9,7 +9,7 @@ public class Mario extends Character {
     private LeftHand leftHand;
 
     private Mario(int x, int y, boolean visible) {
-        super(x, y, visible);
+        super(x, y, visible, "res/Mario.png");
         this.rightHand = new RightHand();
         this.leftHand = new LeftHand();
     }

@@ -1,8 +1,11 @@
 package Characters;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 import eg.edu.alexu.csd.oop.game.GameObject;
+
+import javax.imageio.ImageIO;
 
 public abstract class Character implements GameObject {
     protected int x;
@@ -10,10 +13,17 @@ public abstract class Character implements GameObject {
     protected boolean visible;
     protected BufferedImage[] spriteImages;
 
-    public Character(int x, int y, boolean visible) {
+    public Character(int x, int y, boolean visible, String path) {
         this.x = x;
         this.y = y;
-        this.visible = visible;
+        //this.type = type;
+        this.visible = true;
+        // create a bunch of buffered images and place into an array, to be displayed sequentially
+        try {
+            spriteImages[0] = ImageIO.read(getClass().getResourceAsStream(path));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public int getX() {
