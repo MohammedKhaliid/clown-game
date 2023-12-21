@@ -5,8 +5,12 @@ import eg.edu.alexu.csd.oop.game.GameObject;
 
 public class EasyGame extends Game{
 
-    private final long startTime = System.currentTimeMillis();
+    private static final int MUSHROOM_COUNT = 15;
+    private static final int COIN_COUNT = 2;
+    private static final int VILLAIN_COUNT = 2;
 
+
+//    private final long startTime = System.currentTimeMillis();
     public EasyGame(int screenWidth, int screenHeight) {
         super(screenWidth, screenHeight);
         mario = Mario.getMario();
@@ -22,23 +26,20 @@ public class EasyGame extends Game{
         leftPlate.setX(mario.getX() + (int)(mario.getWidth()*0.65));
         leftPlate.setY(mario.getY() + (int)(mario.getHeight()*0.15));
 
-//        leftPlate.setVisible(false);
-//        rightPlate.setVisible(false);
+        ((Plate)leftPlate).setVisible(false);
+        ((Plate)rightPlate).setVisible(false);
 
         control.add(rightPlate);
         control.add(leftPlate);
 
-//        ((Plate)rightObject).setVisible(false);
-//        ((Plate)leftObject).setVisible(false);
-
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < MUSHROOM_COUNT; i++)
             moving.add(ShapeFactory.createShape(0,0));      // 0 for mushroom
 //
-        for (int i = 0; i < 1; i++)
+        for (int i = 0; i < COIN_COUNT; i++)
             moving.add(ShapeFactory.createShape(1,0));      // 1 for coin
 
-//        for (int i = 0; i < 1; i++)
-//            moving.add(ShapeFactory.createShape(2,1));      // 2 for villain
+        for (int i = 0; i < VILLAIN_COUNT; i++)
+            moving.add(ShapeFactory.createShape(2,1));      // 2 for villain
 
     }
 
@@ -78,6 +79,9 @@ public class EasyGame extends Game{
                 if (intersect(mvng, rightComp)) {
                     moving.remove(mvng);
                     control.add(mvng);
+
+
+
                     mario.getRightHand().add((Mushroom) mvng);
 
                     Mushroom[] m = mario.getRightHand().lastThreeMushrooms();
@@ -89,13 +93,15 @@ public class EasyGame extends Game{
                             m[i].setX((int) (Math.random() * getWidth()));
                             m[i].setY(-1 * (int) (Math.random() * getHeight()));
                         }
+                        score+=5;
                     }
                 } else if (intersect(mvng, leftComp)) {
                     moving.remove(mvng);
                     control.add(mvng);
+
                     mario.getLeftHand().add((Mushroom) mvng);
 
-                    Mushroom[] m = mario.getRightHand().lastThreeMushrooms();
+                    Mushroom[] m = mario.getLeftHand().lastThreeMushrooms();
                     if (m != null) {
                         for (int i = 0; i < 3; i++) {
                             control.remove(m[i]);
@@ -103,6 +109,7 @@ public class EasyGame extends Game{
                             m[i].setX((int) (Math.random() * getWidth()));
                             m[i].setY(-1 * (int) (Math.random() * getHeight()));
                         }
+                        score+=5;
                     }
                 }
 
@@ -114,7 +121,7 @@ public class EasyGame extends Game{
                 }
             } else if (mvng instanceof Coin) {
                 if (intersect(mvng, mario)) {
-                    score += 1;
+                    score += 2;
                     ((Coin) mvng).setVisible(false);
                 }
                 if (!mvng.isVisible()) {
@@ -125,23 +132,38 @@ public class EasyGame extends Game{
                 }
             } else if (mvng instanceof Villain) {     //add sort of visuals or sounds when score decreases
                 if (intersect(mvng, mario)) {
-                    score -= 1;
+                    score -= 2*((Villain) mvng).getType() + 1;
+                    if(score < 0) score = 0;
                     ((Villain) mvng).setVisible(false);
                 }
 
                 if (!mvng.isVisible()) {
-                    mvng.setY(-1 * (int) (Math.random() * getHeight()));
+                    mvng.setY(-1 * (int) (Math.random() * getHeight()) * 5);
                     mvng.setX((int) (Math.random() * getWidth()));
 
                     ((Villain) mvng).setVisible(true);
                 }
             }
-//            else{
-//                mvng.setVisible(true);
-//                mvng.setX((int)(Math.random() * getWidth()));
-//                mvng.setY(-1 * (int)(Math.random() * getHeight()));
-//            }
+            GameObject lastRight = rightPlate, lastLeft = leftPlate;
+            int rightFlag = lastRight.getWidth() / 6, leftFlag = lastLeft.getWidth() / 4;
+            for (GameObject o : control) {
+                if (o instanceof Mushroom) {
+                    if (((Mushroom) o).getIsRight()) {
+                        o.setX(lastRight.getX() + rightFlag);
+                        o.setY(lastRight.getY() - o.getHeight());
+                        lastRight = o;
+                        rightFlag = 0;
+                    } else {
+                        o.setX(lastLeft.getX() + leftFlag);
+                        o.setY(lastLeft.getY() - o.getHeight());
+                        lastLeft = o;
+                        leftFlag = 0;
+                    }
+
+                }
+            }
         }
+        if(control.size() - 3 == MUSHROOM_COUNT) return false;
         return true;
     }
 }

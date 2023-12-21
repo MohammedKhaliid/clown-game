@@ -1,4 +1,6 @@
 import Games.EasyGame;
+import Games.HardGame;
+import Games.MediumGame;
 import eg.edu.alexu.csd.oop.game.GameEngine;
 
 import javax.swing.*;
@@ -49,11 +51,11 @@ public class Main {
         menu.add(pauseMenuItem);
         menu.add(resumeMenuItem);
         menuBar.add(menu);
-        final GameEngine.GameController gameController = GameEngine.start("Very Simple Game in 99 Line of Code", new EasyGame(800,500), menuBar, Color.BLACK);
+        final GameEngine.GameController gameController = GameEngine.start("Very Simple Game in 99 Line of Code", new HardGame(900,700), menuBar, new Color(63, 134, 218));
 
         newMenuItem.addActionListener(new ActionListener() {
             @Override public void actionPerformed(ActionEvent e) {
-                gameController.changeWorld(new EasyGame(800, 500));
+//                gameController.changeWorld(new HardGame(900,700));
             }
         });
         pauseMenuItem.addActionListener(new ActionListener() {

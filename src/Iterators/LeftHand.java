@@ -1,7 +1,6 @@
 package Iterators;
 
 import Characters.Mushroom;
-
 import java.util.Stack;
 
 public class LeftHand implements Iterator {
@@ -9,11 +8,12 @@ public class LeftHand implements Iterator {
 
     public void add(Mushroom mushroom)
     {
+        mushroom.setIsRight(false);
         plate.push(mushroom);
     }
     public Mushroom[] lastThreeMushrooms()
     {
-        if (plate.size() > 3) {
+        if (plate.size() > 2) {
             Mushroom m1 = plate.pop();
             Mushroom m2 = plate.pop();
             Mushroom m3 = plate.pop();

@@ -1,25 +1,34 @@
 package Characters;
 
+import Games.Game;
+
 import java.util.Random;
 
 public class ShapeFactory {
     private static final int WINDOW_WIDTH = 800;
+
+    private static int lastX = 0;
+    private static int lastY = 0;
+
     public static Shape createShape(int type, int level) {
         Shape shape;
         Random randomizer = new Random();
 
-//      int shapeType = randomizer.nextInt(100);
-
         if (type == 0) {
+            lastX = randomizer.nextInt(WINDOW_WIDTH);
+            lastY = randomizer.nextInt(4500);
             int color = randomizer.nextInt(Mushroom.COLORS_COUNT);
-            shape = new Mushroom(randomizer.nextInt(WINDOW_WIDTH), -randomizer.nextInt(1000), color);
+            shape = new Mushroom((lastX + 80)%(WINDOW_WIDTH-10), -(lastY+100), color);
         } else if (type == 1) {
-            shape = new Coin(randomizer.nextInt(WINDOW_WIDTH), -randomizer.nextInt(WINDOW_WIDTH/4));
-        } else if (type == 2){
+            lastX = randomizer.nextInt(WINDOW_WIDTH);
+            lastY = randomizer.nextInt(4500);
+            shape = new Coin((lastX + 80)%(WINDOW_WIDTH-10), -(lastY+100));
+        } else if (type == 2) {
             int vType = randomizer.nextInt(level);
-            shape = new Villain(randomizer.nextInt(WINDOW_WIDTH), 0, vType);
-        }
-        else {
+            lastX = randomizer.nextInt(WINDOW_WIDTH);
+            lastY = randomizer.nextInt(4500);
+            shape = new Villain((lastX + 80)%(WINDOW_WIDTH-10), -(lastY+100), vType);
+        } else {
             shape = new Plate(400, 0, "/Plate.png");
         }
 

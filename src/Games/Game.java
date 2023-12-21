@@ -11,13 +11,16 @@ import java.util.List;
 
 public abstract class Game implements World {
 
-    public static int MAX_TIME = 60 * 1000;	// 1 minute
+    public static int MAX_TIME = 120 * 1000;	// 2 minute
+
+//    public static final int RANDOM_Y_RANGE = 200;
+
     protected Mario mario;
     protected int score;
     protected int width;
     protected int height;
     protected int speed;
-    protected long startTime;
+    protected long startTime = System.currentTimeMillis();
     protected ProgressManager progressManager;
     protected GameObject rightPlate;
     protected GameObject leftPlate;
@@ -62,7 +65,7 @@ public abstract class Game implements World {
 
     @Override
     public int getSpeed() {
-        return 10;
+        return 5;
     }
 
     @Override
@@ -78,6 +81,11 @@ public abstract class Game implements World {
         return (Math.abs((o1.getX() + o1.getWidth()/2) - (o2.getX() + o2.getWidth()/2)) <= (o1.getWidth() + o2.getWidth())/2)
                 && (Math.abs((o1.getY() + o1.getHeight()/2) - (o2.getY() + o2.getHeight()/2)) <= (o1.getHeight() + o2.getHeight())/2);
     }
+
+//    protected boolean intersect(GameObject o1, GameObject o2) {
+//        return (Math.abs((o1.getX() + o1.getWidth()/2) - (o2.getX() + o2.getWidth()/2)) <= (o1.getWidth() + o2.getWidth())/2)
+//                && (Math.abs((o1.getY() + o1.getHeight()/2) - (o2.getY() + o2.getHeight()/2)) == (o1.getHeight() + o2.getHeight())/2);
+//    }
 
 
     protected void attachPlates(){
