@@ -1,5 +1,147 @@
 package Games;
 
+import Characters.*;
+import eg.edu.alexu.csd.oop.game.GameObject;
+
 public class EasyGame extends Game{
 
+    private final long startTime = System.currentTimeMillis();
+
+    public EasyGame(int screenWidth, int screenHeight) {
+        super(screenWidth, screenHeight);
+        mario = Mario.getMario();
+        control.add(mario);
+
+
+        rightPlate = ShapeFactory.createShape(3,0);
+        leftPlate = ShapeFactory.createShape(3,0);
+
+        rightPlate.setX(mario.getX());
+        rightPlate.setY(mario.getY() + (int)(mario.getHeight()*0.15));
+
+        leftPlate.setX(mario.getX() + (int)(mario.getWidth()*0.65));
+        leftPlate.setY(mario.getY() + (int)(mario.getHeight()*0.15));
+
+//        leftPlate.setVisible(false);
+//        rightPlate.setVisible(false);
+
+        control.add(rightPlate);
+        control.add(leftPlate);
+
+//        ((Plate)rightObject).setVisible(false);
+//        ((Plate)leftObject).setVisible(false);
+
+        for (int i = 0; i < 10; i++)
+            moving.add(ShapeFactory.createShape(0,0));      // 0 for mushroom
+//
+        for (int i = 0; i < 1; i++)
+            moving.add(ShapeFactory.createShape(1,0));      // 1 for coin
+
+//        for (int i = 0; i < 1; i++)
+//            moving.add(ShapeFactory.createShape(2,1));      // 2 for villain
+
+    }
+
+    @Override
+    public boolean refresh() {
+        if (System.currentTimeMillis() - startTime > MAX_TIME) {
+            return false;
+        }
+
+        attachPlates();
+
+        for (GameObject mvng : moving.toArray(new GameObject[moving.size()])) {
+
+//            if(mvng.isVisible()){
+
+            mvng.setY(mvng.getY() + 1);
+
+            //Exceeds the borders
+            if (mvng.getY() >= getHeight()) {
+                mvng.setX((int) (Math.random() * getWidth()));
+                mvng.setY(-1 * (int) (Math.random() * getHeight()));
+            }
+
+            if (mvng instanceof Mushroom) {
+
+                GameObject rightComp = rightPlate;
+                GameObject leftComp = leftPlate;
+
+                //specifying the last mushroom to be used in intersection comparison
+                if (mario.getRightHand().getLastMushroom() != null) {
+                    rightComp = mario.getRightHand().getLastMushroom();
+                }
+                if (mario.getLeftHand().getLastMushroom() != null) {
+                    leftComp = mario.getLeftHand().getLastMushroom();
+                }
+
+                if (intersect(mvng, rightComp)) {
+                    moving.remove(mvng);
+                    control.add(mvng);
+                    mario.getRightHand().add((Mushroom) mvng);
+
+                    Mushroom[] m = mario.getRightHand().lastThreeMushrooms();
+
+                    if (m != null) {
+                        for (int i = 0; i < 3; i++) {
+                            control.remove(m[i]);
+                            moving.add(m[i]);
+                            m[i].setX((int) (Math.random() * getWidth()));
+                            m[i].setY(-1 * (int) (Math.random() * getHeight()));
+                        }
+                    }
+                } else if (intersect(mvng, leftComp)) {
+                    moving.remove(mvng);
+                    control.add(mvng);
+                    mario.getLeftHand().add((Mushroom) mvng);
+
+                    Mushroom[] m = mario.getRightHand().lastThreeMushrooms();
+                    if (m != null) {
+                        for (int i = 0; i < 3; i++) {
+                            control.remove(m[i]);
+                            moving.add(m[i]);
+                            m[i].setX((int) (Math.random() * getWidth()));
+                            m[i].setY(-1 * (int) (Math.random() * getHeight()));
+                        }
+                    }
+                }
+
+                if (!mvng.isVisible()) {
+                    mvng.setY(-1 * (int) (Math.random() * getHeight()));
+                    mvng.setX((int) (Math.random() * getWidth()));
+
+                    ((Mushroom) mvng).setVisible(true);
+                }
+            } else if (mvng instanceof Coin) {
+                if (intersect(mvng, mario)) {
+                    score += 1;
+                    ((Coin) mvng).setVisible(false);
+                }
+                if (!mvng.isVisible()) {
+                    mvng.setY(-1 * (int) (Math.random() * getHeight()));
+                    mvng.setX((int) (Math.random() * getWidth()));
+
+                    ((Coin) mvng).setVisible(true);
+                }
+            } else if (mvng instanceof Villain) {     //add sort of visuals or sounds when score decreases
+                if (intersect(mvng, mario)) {
+                    score -= 1;
+                    ((Villain) mvng).setVisible(false);
+                }
+
+                if (!mvng.isVisible()) {
+                    mvng.setY(-1 * (int) (Math.random() * getHeight()));
+                    mvng.setX((int) (Math.random() * getWidth()));
+
+                    ((Villain) mvng).setVisible(true);
+                }
+            }
+//            else{
+//                mvng.setVisible(true);
+//                mvng.setX((int)(Math.random() * getWidth()));
+//                mvng.setY(-1 * (int)(Math.random() * getHeight()));
+//            }
+        }
+        return true;
+    }
 }

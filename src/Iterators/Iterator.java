@@ -3,7 +3,7 @@ import Characters.Mushroom;
 public interface Iterator {
 
     void add(Mushroom mushroom);
-    boolean lastThreeMatches();
+    Mushroom[] lastThreeMushrooms();
 
-    Mushroom lastMushroom();
+    Mushroom getLastMushroom();
 }
