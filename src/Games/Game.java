@@ -1,5 +1,7 @@
 package Games;
 
+import Characters.Background;
+import Characters.Character;
 import Characters.Mario;
 import Characters.Plate;
 import Helpers.ProgressManager;
