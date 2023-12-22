@@ -1,3 +1,5 @@
+package Windows;
+
 import Games.*;
 
 import javax.swing.*;
@@ -19,7 +21,7 @@ public class MainWindow extends JFrame {
     public MainWindow() {
         setTitle("Select Difficulty");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(900, 700 + 50);
+        setSize(SCREEN_WIDTH, SCREEN_HEIGHT + 50);
         setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
@@ -48,7 +50,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnActionPerformed(0);
-                hideWindow();
+                setVisible(false);
             }
         });
 
@@ -65,7 +67,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnActionPerformed(1);
-                hideWindow();
+                setVisible(false);
             }
         });
 
@@ -82,7 +84,7 @@ public class MainWindow extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnActionPerformed(2);
-                hideWindow();
+                setVisible(false);
             }
         });
     }
@@ -98,39 +100,21 @@ public class MainWindow extends JFrame {
             game = new HardGame(SCREEN_WIDTH, SCREEN_HEIGHT);
         }
 
-        if (gameWindow == null) {
-            gameWindow = new GameWindow(MainWindow.this, game);
-        } else {
-            gameWindow.gameController.changeWorld(game);
-        }
+        gameWindow = new GameWindow(MainWindow.this, game);
     }
 
     public void showWindow() {
-        Window[] windows = java.awt.Window.getWindows();
+        Window[] windows = Window.getWindows();
 
         for (Window window : windows) {
             if (window instanceof JFrame && ((JFrame) window).getTitle().equals("Mario Game")) {
-                window.setVisible(false);
+                window.dispose();
             }
         }
 
         setVisible(true);
 
         gameWindow.gameController.pause();
-    }
-
-    public void hideWindow() {
-        Window[] windows = java.awt.Window.getWindows();
-
-        for (Window window : windows) {
-            if (window instanceof JFrame && ((JFrame) window).getTitle().equals("Mario Game")) {
-                window.setVisible(true);
-            }
-        }
-
-        setVisible(false);
-
-        gameWindow.gameController.resume();
     }
 
     public static void main(String[] args) {
