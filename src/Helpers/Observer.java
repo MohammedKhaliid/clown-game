@@ -1,4 +1,5 @@
 package Helpers;
 
-public interface Observer {
+interface Observer {
+    public abstract void update(String state);
 }
