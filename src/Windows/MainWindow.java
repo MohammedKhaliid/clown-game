@@ -22,12 +22,12 @@ public class MainWindow extends JFrame {
     public final static Color BG_COLOR = new Color(108, 148, 238);
     public final static Color BTN_COLOR = new Color(174, 77, 36);
     public final static Color HIGHLIGHT_COLOR = new Color(234, 189, 177);
-    private final static File FONT_FINAL = new File("res/ARCADECLASSIC.TTF");
+    private final static File FONT_FILE = new File("res/ARCADECLASSIC.TTF");
     private final static Font FONT;
 
     static {
         try {
-            FONT = Font.createFont(Font.TRUETYPE_FONT, FONT_FINAL);
+            FONT = Font.createFont(Font.TRUETYPE_FONT, FONT_FILE);
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }
