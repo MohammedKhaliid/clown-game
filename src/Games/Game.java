@@ -33,6 +33,8 @@ public abstract class Game implements World {
     public Game(int screenWidth, int screenHeight) {
         width = screenWidth;
         height = screenHeight;
+        Background b = new Background(0,-5,"/World.png");
+        constant.add(b);
     }
     @Override
     public List<GameObject> getConstantObjects() {

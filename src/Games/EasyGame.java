@@ -16,9 +16,6 @@ public class EasyGame extends Game{
         mario = Mario.getMario();
         control.add(mario);
 
-        Background b = new Background(0,0,"/World.png");
-        constant.add(b);
-
         rightPlate = ShapeFactory.createShape(3,0);
         leftPlate = ShapeFactory.createShape(3,0);
 
