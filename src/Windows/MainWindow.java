@@ -6,7 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import java.io.File;
+import java.io.IOException;
 
 public class MainWindow extends JFrame {
     private GameWindow gameWindow;
@@ -14,7 +19,19 @@ public class MainWindow extends JFrame {
     public final static int SCREEN_WIDTH = 900;
     public final static int SCREEN_HEIGHT = 700;
 
-    public final static Color BG_COLOR = new Color(63, 134, 218);
+    public final static Color BG_COLOR = new Color(108, 148, 238);
+    public final static Color BTN_COLOR = new Color(174, 77, 36);
+    public final static Color HIGHLIGHT_COLOR = new Color(234, 189, 177);
+    private final static File FONT_FINAL = new File("res/ARCADECLASSIC.TTF");
+    private final static Font FONT;
+
+    static {
+        try {
+            FONT = Font.createFont(Font.TRUETYPE_FONT, FONT_FINAL);
+        } catch (FontFormatException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private final static int PADDING = 60;
 
@@ -33,63 +50,45 @@ public class MainWindow extends JFrame {
 
         JLabel label = new JLabel("Select Difficulty");
         label.setHorizontalAlignment(JLabel.CENTER);
-        label.setFont(new Font("Times New Roman", Font.BOLD, 60));
         label.setForeground(Color.white);
+
+        Font headlineFont = FONT.deriveFont(Font.PLAIN, 60);
+        label.setFont(headlineFont);
+
         panel.add(label);
 
-        JButton easyBtn = new JButton("Easy");
-        easyBtn.setBackground(Color.BLACK);
-        easyBtn.setForeground(BG_COLOR);
-        easyBtn.setOpaque(true);
-        easyBtn.setBorderPainted(false);
-        easyBtn.setFocusPainted(false);
-        easyBtn.setFont(new Font("Arial", Font.BOLD, 20));
+        JButton easyBtn = createBtn("Easy");
         panel.add(easyBtn);
 
         easyBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                btnActionPerformed(0);
-                setVisible(false);
+                createGame(0);
             }
         });
 
-        JButton mediumBtn = new JButton("Medium");
-        mediumBtn.setBackground(Color.BLACK);
-        mediumBtn.setForeground(BG_COLOR);
-        mediumBtn.setOpaque(true);
-        mediumBtn.setBorderPainted(false);
-        mediumBtn.setFocusPainted(false);
-        mediumBtn.setFont(new Font("Arial", Font.BOLD, 20));
+        JButton mediumBtn = createBtn("Medium");
         panel.add(mediumBtn);
 
         mediumBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                btnActionPerformed(1);
-                setVisible(false);
+                createGame(1);
             }
         });
 
-        JButton hardBtn = new JButton("Hard");
-        hardBtn.setBackground(Color.BLACK);
-        hardBtn.setForeground(BG_COLOR);
-        hardBtn.setOpaque(true);
-        hardBtn.setBorderPainted(false);
-        hardBtn.setFocusPainted(false);
-        hardBtn.setFont(new Font("Arial", Font.BOLD, 20));
+        JButton hardBtn = createBtn("Hard");
         panel.add(hardBtn);
 
         hardBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                btnActionPerformed(2);
-                setVisible(false);
+                createGame(2);
             }
         });
     }
 
-    private void btnActionPerformed(int difficulty) {
+    private void createGame(int difficulty) {
         Game game;
 
         if (difficulty == 0) {
@@ -101,6 +100,30 @@ public class MainWindow extends JFrame {
         }
 
         gameWindow = new GameWindow(MainWindow.this, game);
+
+        setVisible(false);
+    }
+
+    private JButton createBtn(String text) {
+        JButton btn = new JButton(text);
+
+        btn.setBackground(BTN_COLOR);
+        btn.setForeground(HIGHLIGHT_COLOR);
+
+        btn.setOpaque(true);
+
+        int borderThickness = 50;
+        Border border = new CompoundBorder(
+                new BevelBorder(BevelBorder.RAISED, HIGHLIGHT_COLOR, Color.black),
+                new EmptyBorder(borderThickness, borderThickness, borderThickness, borderThickness)
+        );
+
+        btn.setBorder(border);
+
+        Font btnFont = FONT.deriveFont(Font.BOLD, 40);
+        btn.setFont(btnFont);
+
+        return btn;
     }
 
     public void showWindow() {
