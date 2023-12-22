@@ -5,7 +5,7 @@ import eg.edu.alexu.csd.oop.game.GameObject;
 
 public class EasyGame extends Game{
 
-    private static final int MUSHROOM_COUNT = 15;
+    private static final int MUSHROOM_COUNT = 25;
     private static final int COIN_COUNT = 2;
     private static final int VILLAIN_COUNT = 2;
 
