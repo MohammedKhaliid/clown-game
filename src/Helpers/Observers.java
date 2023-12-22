@@ -7,7 +7,6 @@ public class Observers implements Observer {
         this.observerName = observerName;
     }
 
-    @Override
     public void update(String state) {
         System.out.println(observerName + " is updated and the new state is " + state);
     }
