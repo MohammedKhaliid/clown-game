@@ -94,6 +94,7 @@ public class HardGame extends Game{
                             m[i].setY(-1 * (int) (Math.random() * getHeight()));
                         }
                         score+=5;
+                        Progress.setState("+5");
                     }
                 } else if (intersect(mvng, leftComp)) {
                     moving.remove(mvng);
@@ -110,6 +111,7 @@ public class HardGame extends Game{
                             m[i].setY(-1 * (int) (Math.random() * getHeight()));
                         }
                         score+=5;
+                        Progress.setState("+5");
                     }
                 }
 
@@ -122,6 +124,7 @@ public class HardGame extends Game{
             } else if (mvng instanceof Coin) {
                 if (intersect(mvng, mario)) {
                     score += 2;
+                    Progress.setState("+2");
                     ((Coin) mvng).setVisible(false);
                 }
                 if (!mvng.isVisible()) {
@@ -133,6 +136,7 @@ public class HardGame extends Game{
             } else if (mvng instanceof Villain) {     //add sort of visuals or sounds when score decreases
                 if (intersect(mvng, mario)) {
                     score -= 2*((Villain) mvng).getType() + 1;
+                    Progress.setState("-"+2*((Villain) mvng).getType() + 1);
                     if(score < 0) score = 0;
                     ((Villain) mvng).setVisible(false);
                 }

@@ -7,6 +7,7 @@ import Characters.Plate;
 import Helpers.ProgressManager;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
+import Helpers.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -22,6 +23,7 @@ public abstract class Game implements World {
     protected int width;
     protected int height;
     protected int speed;
+    protected State Progress;
     protected long startTime = System.currentTimeMillis();
     protected ProgressManager progressManager;
     protected GameObject rightPlate;
@@ -35,6 +37,11 @@ public abstract class Game implements World {
         height = screenHeight;
         Background b = new Background(0,-5,"/World.png");
         constant.add(b);
+        Observers player = new Observers("Player");
+        Observers observer1 = new Observers("Observer1");
+        Progress = new State();
+        Progress.addObserver(player);
+        Progress.addObserver(observer1);
     }
     @Override
     public List<GameObject> getConstantObjects() {
