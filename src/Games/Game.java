@@ -12,7 +12,7 @@ import java.util.List;
 
 public abstract class Game implements World {
 
-    public static int MAX_TIME = 120 * 1000;	// 2 minute
+    public static int MAX_TIME = 60 * 1000;	// 2 minute
 
 //    public static final int RANDOM_Y_RANGE = 200;
 
