@@ -3,8 +3,6 @@ package Games;
 import Characters.Background;
 import Characters.Character;
 import Characters.Mario;
-import Characters.Plate;
-import Helpers.ProgressManager;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import eg.edu.alexu.csd.oop.game.World;
 import Helpers.*;
@@ -27,7 +25,6 @@ public abstract class Game implements World {
 
 
     protected long startTime = System.currentTimeMillis();
-    protected ProgressManager progressManager;
     protected GameObject rightPlate;
     protected GameObject leftPlate;
     protected final List<GameObject> constant = new LinkedList<GameObject>();
