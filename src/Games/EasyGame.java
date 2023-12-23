@@ -93,7 +93,7 @@ public class EasyGame extends Game{
                             m[i].setY(-1 * (int) (Math.random() * getHeight()));
                         }
                         score+=5;
-                        Progress.setState("+5");
+                        Progress.setState("+5",this);
                     }
                 } else if (intersect(mvng, leftComp)) {
                     moving.remove(mvng);
@@ -110,7 +110,7 @@ public class EasyGame extends Game{
                             m[i].setY(-1 * (int) (Math.random() * getHeight()));
                         }
                         score+=5;
-                        Progress.setState("+5");
+                        Progress.setState("+5",this);
                     }
                 }
 
@@ -123,7 +123,7 @@ public class EasyGame extends Game{
             } else if (mvng instanceof Coin) {
                 if (intersect(mvng, mario)) {
                     score += 2;
-                    Progress.setState("+2");
+                    Progress.setState("+2",this);
                     ((Coin) mvng).setVisible(false);
                 }
                 if (!mvng.isVisible()) {
@@ -135,7 +135,7 @@ public class EasyGame extends Game{
             } else if (mvng instanceof Villain) {     //add sort of visuals or sounds when score decreases
                 if (intersect(mvng, mario)) {
                     score -= 2*((Villain) mvng).getType() + 1;
-                    Progress.setState("-"+2*((Villain) mvng).getType() + 1);
+                    Progress.setState("-"+(2*((Villain) mvng).getType() + 1),this);
                     if(score < 0) score = 0;
                     ((Villain) mvng).setVisible(false);
                 }

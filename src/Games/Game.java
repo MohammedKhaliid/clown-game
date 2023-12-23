@@ -24,6 +24,8 @@ public abstract class Game implements World {
     protected int height;
     protected int speed;
     protected State Progress;
+
+
     protected long startTime = System.currentTimeMillis();
     protected ProgressManager progressManager;
     protected GameObject rightPlate;
@@ -33,15 +35,16 @@ public abstract class Game implements World {
     protected final List<GameObject> control = new LinkedList<GameObject>();
 
     public Game(int screenWidth, int screenHeight) {
+
         width = screenWidth;
         height = screenHeight;
         Background b = new Background(0,-5,"/World.png");
         constant.add(b);
         Observers player = new Observers("Player");
-        Observers observer1 = new Observers("Observer1");
         Progress = new State();
         Progress.addObserver(player);
-        Progress.addObserver(observer1);
+        addProgress();
+        clearProgress();
     }
     @Override
     public List<GameObject> getConstantObjects() {
@@ -106,4 +109,52 @@ public abstract class Game implements World {
         leftPlate.setX(mario.getX() + (int)(mario.getWidth()*0.65));
         leftPlate.setY(mario.getY() + (int)(mario.getHeight()*0.15));
     }
+
+    private void addProgress(){
+        Background two = new Background(0,0,"/2.png");
+        constant.add(two);
+        Background five = new Background(0,0,"/5.png");
+        constant.add(five);
+        Background bad1 = new Background(0,0,"/bad1.png");
+        constant.add(bad1);
+        Background bad3 = new Background(0,0,"/bad3.png");
+        constant.add(bad3);
+        Background bad5 = new Background(0,0,"/bad5.png");
+        constant.add(bad5);
+    }
+    public void printProgress(String state){
+        switch (state) {
+            case "+2":
+                ((Character)constant.get(1)).setVisible(true);
+                break;
+            case "+5":
+                ((Character)constant.get(2)).setVisible(true);
+                break;
+            case "-1":
+                ((Character)constant.get(3)).setVisible(true);
+                break;
+            case "-3":
+                ((Character)constant.get(4)).setVisible(true);
+                break;
+            case "-5":
+                ((Character)constant.get(5)).setVisible(true);
+                break;
+
+        }
+
+    }
+
+ public void clearProgress(){
+        boolean flag =true;
+        for(GameObject o:constant)
+        {
+            if(flag==true) {
+                flag = false;
+                continue;
+            }
+            ((Character)o).setVisible(false);
+        }
+
+ }
+
 }
