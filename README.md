@@ -7,14 +7,14 @@ Circus of Plates is a single-player game featuring a clown (Mario character) who
 ### Falling Objects
 - There are 3 kinds of falling objects: mushrooms, villains, and coins.
 - The user earns points for collecting three consecutive mushrooms of the same color.
-- Collecting falling coins also rewards the player with number of points.
+- Collecting falling coins also rewards the player with some points.
 - Touching falling villains results in a point deduction, with the penalty varying based on the type of villain.
 
 ### Difficulty Levels
 - The game offers 3 levels of difficulty, each with differences in speed, the number of falling objects, and their types.
 
 ### Engine
-- The game utilizes an engine (.jar) supporting three types of objects: movable, constant, and user-controlled objects (found in the "lib" directory).
+- The game utilizes an engine (.jar) supporting three types of objects: movable, constant, and user-controlled objects (can be found in the "lib" directory).
 
 ### Design Patterns Used
 1. Singleton
